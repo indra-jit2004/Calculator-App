@@ -1,0 +1,72 @@
+body {
+    background: #d6f5ff;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    background: #2f3b48;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    display: inline-block; /* prevents extra empty space */
+}
+
+.display input {
+    width: 100%;
+    height: 70px;
+    background: #1c252e;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 2rem;
+    text-align: right;
+    padding: 10px 12px; /* equal horizontal padding */
+    margin-bottom: 20px;
+    box-sizing: border-box; /* ensures padding doesn't add extra space */
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* evenly distributes space */
+    gap: 10px;
+    width: 100%; /* make grid use all available width */
+}
+
+.buttons input {
+    background: #3c4a57;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 100%; /* buttons fill their cell */
+}
+
+.buttons input:hover {
+    background: #52606e;
+    transform: scale(1.05);
+}
+
+.buttons input.equal {
+    grid-column: span 2; /* take two spaces */
+    background: orange !important; /* force orange color */
+    color: white;
+    font-size: 1.5rem;
+}
+
+.buttons input.equal:hover {
+    background: darkorange !important;
+}
