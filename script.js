@@ -2,20 +2,28 @@ const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".buttons input");
 
 const appendValue = (val) => {
-    display.value += val;
+    if (display.value === "0" && !isNaN(val)) {
+        display.value = val; // replace initial 0
+    } else {
+        display.value += val;
+    }
 };
 
 const clearDisplay = () => {
-    display.value = "";
+    display.value = "0";
 };
 
 const deleteLast = () => {
-    display.value = display.value.slice(0, -1);
+    if (display.value.length > 1) {
+        display.value = display.value.slice(0, -1);
+    } else {
+        display.value = "0";
+    }
 };
 
 const calculate = () => {
     try {
-        display.value = eval(display.value) || "";
+        display.value = eval(display.value) || "0";
     } catch {
         display.value = "Error";
     }
@@ -27,7 +35,7 @@ buttons.forEach(button => {
 
         if (value === "AC") {
             clearDisplay();
-        } else if (value === "DE") {
+        } else if (value === "DEL") {
             deleteLast();
         } else if (value === "=") {
             calculate();
@@ -35,4 +43,19 @@ buttons.forEach(button => {
             appendValue(value);
         }
     });
+});
+
+// ✅ Keyboard support for desktop
+document.addEventListener("keydown", (e) => {
+    const key = e.key;
+
+    if (!isNaN(key) || ["+", "-", "*", "/", "%", "."].includes(key)) {
+        appendValue(key);
+    } else if (key === "Enter") {
+        calculate();
+    } else if (key === "Backspace") {
+        deleteLast();
+    } else if (key.toLowerCase() === "c") {
+        clearDisplay();
+    }
 });
