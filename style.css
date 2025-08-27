@@ -1,5 +1,5 @@
 body {
-    background: #d6f5ff;
+    background: url('photo-1501785888041-af3ef285b470.jpg') no-repeat center center/cover;
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
@@ -8,65 +8,87 @@ body {
     margin: 0;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .calculator {
-    background: #2f3b48;
+    background: rgba(0, 0, 0, 0.4);
     padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    display: inline-block; /* prevents extra empty space */
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    width: 90%;              /* responsive width */
+    max-width: 310px;        /* prevent overflow on large screens */
 }
 
 .display input {
     width: 100%;
-    height: 70px;
-    background: #1c252e;
+    height: 12vh;            /* relative height for scaling */
+    min-height: 60px;
+    background: rgba(0, 0, 0, 0.6);
     border: none;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 2rem;
+    border-radius: 12px;
+    color: white;
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* auto-adjust font */
     text-align: right;
-    padding: 10px 12px; /* equal horizontal padding */
+    padding: 10px;
     margin-bottom: 20px;
-    box-sizing: border-box; /* ensures padding doesn't add extra space */
+    box-sizing: border-box;
 }
 
 .buttons {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* evenly distributes space */
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    width: 100%; /* make grid use all available width */
 }
 
 .buttons input {
-    background: #3c4a57;
     border: none;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 1.2rem;
+    aspect-ratio: 1 / 1;   /* square buttons */
+    border-radius: 50%;    /* circular look */
+    font-size: clamp(1rem, 4vw, 1.4rem);
     color: white;
+    background: rgba(0, 0, 0, 0.7);
     cursor: pointer;
-    transition: 0.2s;
-    width: 100%; /* buttons fill their cell */
+    transition: 0.3s;
+    width: 100%;
 }
 
 .buttons input:hover {
-    background: #52606e;
-    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.15);
 }
 
+/* Operators (orange text only) */
+.buttons input[value="/"],
+.buttons input[value="*"],
+.buttons input[value="-"],
+.buttons input[value="+"],
+.buttons input[value="%"] {
+    color: orange;
+}
+
+/* AC and DEL also orange */
+.buttons input[value="AC"],
+.buttons input[value="DEL"] {
+    color: orange;
+}
+
+/* Equal button (orange background) */
 .buttons input.equal {
-    grid-column: span 2; /* take two spaces */
-    background: orange !important; /* force orange color */
+    background: orange !important;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .buttons input.equal:hover {
     background: darkorange !important;
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+    .calculator {
+        padding: 15px;
+    }
+    .buttons {
+        gap: 8px;
+    }
+    .buttons input {
+        font-size: 1rem;
+    }
 }
